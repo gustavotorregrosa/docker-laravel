@@ -11,7 +11,7 @@ web:
         - php
 
 php:
-    image: php:7.3-fpm
+    build: .
     container_name: php-fpm
     volumes: 
         - ./raiz:/www
@@ -19,13 +19,14 @@ php:
         - db
 
 db:
-    image: mysql
+    image: mysql:5.7
     container_name: mysql
     ports: 
-        - "3306:3306"
-    command: 
-        - default-authentication-plugin=mysql_native_password
+        - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment: 
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: teste
+        MYSQL_ROOT_PASSWORD: gustavo
+        MYSQL_DATABASE: meularavel
+        MYSQL_USER: gustavo
+        MYSQL_PASSWORD: gustavo
