@@ -5,39 +5,38 @@ services:
         image: nginx:latest
         container_name: nginx
         restart: always
-        ports: 
+        ports:
             - "80:80"
-        volumes: 
-            - ./raiz:/www
+        volumes:
+            - ../raiz:/www
             - ./site.conf:/etc/nginx/conf.d/site.conf
-        networks: 
+        networks:
             - app-network
 
     php:
-        build: 
+        build:
             context: ./phpDockerFile
             dockerfile: Dockerfile
         container_name: php-fpm
-        volumes: 
-            - ./raiz:/www
-        networks: 
+        volumes:
+            - ../raiz:/www
+        networks:
             - app-network
 
     db:
         image: mysql:5.7
         container_name: mysql
-        ports: 
+        ports:
             - 3306:3306
         restart: always
         tty: true
-        environment: 
+        environment:
             MYSQL_ROOT_PASSWORD: gustavo
             MYSQL_DATABASE: meularavel
             MYSQL_USER: gustavo
             MYSQL_PASSWORD: gustavo
-        networks: 
+        networks:
             - app-network
-
 
 networks:
     app-network:
